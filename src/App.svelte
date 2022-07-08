@@ -3,6 +3,8 @@
   import Counter from '@/lib/Counter.svelte'
   import Modal from '@/components/Modal.svelte'
 
+  let showModal = false
+
   let people = [
     { name: 'yoshi', beltColour: 'black', age: 25, id: 1 },
     { name: 'mario', beltColour: 'orange', age: 45, id: 2 },
@@ -14,11 +16,16 @@
     people = people.filter((person) => person.id !== id)
   }
 
+  const toggleModal = () => {
+    showModal = !showModal
+  }
+
 </script>
 
-<Modal />
+<Modal message='Hey, I am a prop value' isPromo={false} showModal={showModal} on:click={toggleModal} />
 
 <main>
+  <button on:click={toggleModal}>Open Modal</button>
   {#each people as person (person.id)}
     <div>
       <h4>{person.name}</h4>
